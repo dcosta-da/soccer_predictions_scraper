@@ -33,10 +33,14 @@ jobs:
           echo "Chrome version is $CHROME_VERSION"
           # Try downloading the ChromeDriver that matches the Chrome version
           CHROMEDRIVER_VERSION=$(curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION)
+          
+          # If the specific version is not found, fall back to the latest version
           if [ -z "$CHROMEDRIVER_VERSION" ]; then
-            echo "ChromeDriver version not found for Chrome version $CHROME_VERSION. Trying a fallback version."
+            echo "ChromeDriver version for Chrome $CHROME_VERSION not found. Trying the latest version."
             CHROMEDRIVER_VERSION=$(curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
           fi
+
+          # Download ChromeDriver
           echo "Downloading ChromeDriver version $CHROMEDRIVER_VERSION"
           wget https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip
           unzip chromedriver_linux64.zip
