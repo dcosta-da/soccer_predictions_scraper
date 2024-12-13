@@ -2,8 +2,8 @@ name: Scraper Betclever Data
 
 on:
   schedule:
-    - cron: '0 15 * * *'  # Exécution à 15h UTC (16h heure française en hiver, CET)
-    - cron: '0 14 * * *'  # Exécution à 14h UTC (16h heure française en été, CEST)
+    - cron: '0 3 * * *'  # Exécution à 4h heure française en hiver (CET, UTC+1)
+    - cron: '0 2 * * *'  # Exécution à 4h heure française en été (CEST, UTC+2)
   push:
     branches:
       - main
@@ -22,7 +22,7 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-       run: |
+        run: |
           pip install -r requirements.txt
           sudo apt-get update
           sudo apt-get install -y wget curl
@@ -35,7 +35,6 @@ jobs:
           sudo mv chromedriver /usr/local/bin/chromedriver
           sudo chown root:root /usr/local/bin/chromedriver
           sudo chmod +x /usr/local/bin/chromedriver
-          
 
       - name: Run the scraper
         run: |
