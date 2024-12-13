@@ -31,8 +31,12 @@ jobs:
           # Get the current version of Chrome installed
           CHROME_VERSION=$(google-chrome --version | sed 's/[^0-9]*\([0-9]*\.[0-9]*\.[0-9]*\).[0-9]*/\1/')
           echo "Chrome version is $CHROME_VERSION"
-          # Download the compatible version of ChromeDriver
+          # Try downloading the ChromeDriver that matches the Chrome version
           CHROMEDRIVER_VERSION=$(curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION)
+          if [ -z "$CHROMEDRIVER_VERSION" ]; then
+            echo "ChromeDriver version not found for Chrome version $CHROME_VERSION. Trying a fallback version."
+            CHROMEDRIVER_VERSION=$(curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
+          fi
           echo "Downloading ChromeDriver version $CHROMEDRIVER_VERSION"
           wget https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip
           unzip chromedriver_linux64.zip
