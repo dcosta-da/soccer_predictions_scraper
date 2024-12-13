@@ -1,31 +1,43 @@
-name: Scraper Betclever Data
+name: CI Pipeline
 
 on:
-  schedule:
-    - cron: '0 15 * * *'  # Exécution à 15h UTC (16h heure française en hiver, CET)
-    - cron: '0 14 * * *'  # Exécution à 14h UTC (16h heure française en été, CEST)
   push:
+    branches:
+      - main
+  pull_request:
     branches:
       - main
 
 jobs:
-  run-scraper:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out the repository
-        uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.11'
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
 
-      - name: Install dependencies
-        run: |
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then
           pip install -r requirements.txt
-          sudo apt-get install -y chromium-chromedriver
+        else
+          pip install selenium pandas requests
+        fi
 
-      - name: Run the scraper
-        run: |
-          python main.py
+    - name: Install Google Chrome
+      run: |
+        sudo apt update
+        sudo apt install -y wget
+        wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+        sudo dpkg -i google-chrome-stable_current_amd64.deb
+        sudo apt --fix-broken install
+
+    - name: Run the script
+      run: |
+        python main.py
