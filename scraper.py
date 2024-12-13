@@ -2,65 +2,97 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
+import pandas as pd
 import time
 
-def scrape_data(driver):
+def scrape_betclever(driver):
     match_data = []
-    driver.get("https://www.betclever.com")
 
     try:
-        # Attendre et cliquer sur le bouton 'View More Games'
-        wait = WebDriverWait(driver, 10)
-        view_more_button = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="showmore"]/b')))
-        view_more_button.click()
+        # Accéder à la page d'accueil de betclever.com
+        driver.get("https://www.betclever.com")
 
-        # Attendre que les nouveaux matchs se chargent
+        # Attendre que le bouton "View More Games" soit cliquable
+        wait = WebDriverWait(driver, 10)
+        view_more_button = wait.until(
+            EC.element_to_be_clickable((By.XPATH, '//*[@id="showmore"]/b'))
+        )
+        
+        # Cliquer sur le bouton "View More Games"
+        view_more_button.click()
+        print("Bouton 'View More Games' cliqué avec succès.")
+
+        # Attendre que les nouveaux éléments se chargent
         time.sleep(5)
 
-        # Récupérer les liens
+        # Récupérer les éléments "Match Tips"
         match_tips_elements = driver.find_elements(By.XPATH, '//a[contains(text(), "Match Tips")]')
         links = [element.get_attribute('href') for element in match_tips_elements]
-    except TimeoutException:
-        print("Erreur : Le bouton 'View More Games' ou les liens de matchs n'ont pas pu être trouvés.")
-        return match_data
+        print("Liens 'Match Tips' récupérés avec succès.")
 
-    # Extraire les données des liens
-    for link in links:
-        try:
+        # Parcourir chaque lien pour extraire les données
+        for link in links:
             driver.get(link)
-            wait.until(EC.presence_of_element_located((By.XPATH, '//main')))
-            
-            # Extraire les informations spécifiques de chaque match
-            match_info = extract_match_info(driver)
-            match_data.append(match_info)
-        except Exception as e:
-            print(f"Erreur lors de l'extraction pour {link}: {e}")
+            time.sleep(3)  # Attendre le chargement complet de la page
 
-    return match_data
+            try:
+                # Extraction des informations spécifiques au match
+                date = driver.find_element(By.XPATH, '/html/body/div[1]/main/section[1]/div/div[1]/div[3]/p[1]').text
+                championship = driver.find_element(By.XPATH, '/html/body/div[1]/main/section[1]/div/div[1]/div[1]/div[1]').text
+                match = driver.find_element(By.XPATH, '/html/body/div[1]/main/section[1]/div/div[1]/div[1]/div[2]').text
 
-def extract_match_info(driver):
-    wait = WebDriverWait(driver, 10)
-    match_info = {}
+                # Section des prédictions "Match Result Predictions"
+                predictions_section = driver.find_element(By.XPATH, '/html/body/div[1]/main/section[2]/div/div[2]')
+                home_win = predictions_section.find_elements(By.CLASS_NAME, 'match-history__item-numbers')[0].text
+                home_odds = predictions_section.find_elements(By.CLASS_NAME, 'match-history__item-numbers')[1].text
+                draw = predictions_section.find_elements(By.CLASS_NAME, 'match-history__item-numbers')[2].text
+                draw_odds = predictions_section.find_elements(By.CLASS_NAME, 'match-history__item-numbers')[3].text
+                away_win = predictions_section.find_elements(By.CLASS_NAME, 'match-history__item-numbers')[4].text
+                away_odds = predictions_section.find_elements(By.CLASS_NAME, 'match-history__item-numbers')[5].text
 
-    try:
-        # Extraire la date
-        date_element = wait.until(EC.presence_of_element_located((By.XPATH, '//div[contains(@class, "date-class")]/p[1]')))
-        match_info["Date"] = date_element.text
-    except TimeoutException:
-        match_info["Date"] = "N/A"
+                # Section des prédictions "Total Goals Predictions"
+                total_goals_section = driver.find_element(By.XPATH, '/html/body/div[1]/main/section[4]/div/div[2]')
+                over_1_5 = total_goals_section.find_elements(By.CLASS_NAME, 'match-history__item-numbers')[0].text
+                odds_1_5 = total_goals_section.find_elements(By.CLASS_NAME, 'match-history__item-numbers')[1].text
+                over_2_5 = total_goals_section.find_elements(By.CLASS_NAME, 'match-history__item-numbers')[2].text
+                odds_2_5 = total_goals_section.find_elements(By.CLASS_NAME, 'match-history__item-numbers')[3].text
+                over_3_5 = total_goals_section.find_elements(By.CLASS_NAME, 'match-history__item-numbers')[4].text
+                odds_3_5 = total_goals_section.find_elements(By.CLASS_NAME, 'match-history__item-numbers')[5].text
+                btts = total_goals_section.find_elements(By.CLASS_NAME, 'match-history__item-numbers')[6].text
+                odds_btts = total_goals_section.find_elements(By.CLASS_NAME, 'match-history__item-numbers')[7].text
 
-    try:
-        # Extraire le championnat
-        championship_element = driver.find_element(By.XPATH, '//div[contains(@class, "championship-class")]')
-        match_info["Championship"] = championship_element.text
-    except NoSuchElementException:
-        match_info["Championship"] = "N/A"
+                # Ajouter les données au tableau
+                match_data.append({
+                    "Date": date,
+                    "Championship": championship,
+                    "Match": match,
+                    "Home Win (%)": home_win,
+                    "Home Odds": home_odds,
+                    "Draw (%)": draw,
+                    "Draw Odds": draw_odds,
+                    "Away Win (%)": away_win,
+                    "Away Odds": away_odds,
+                    "Over 1.5 (%)": over_1_5,
+                    "Odds 1.5": odds_1_5,
+                    "Over 2.5 (%)": over_2_5,
+                    "Odds 2.5": odds_2_5,
+                    "Over 3.5 (%)": over_3_5,
+                    "Odds 3.5": odds_3_5,
+                    "BTTS (%)": btts,
+                    "Odds BTTS": odds_btts,
+                    "Link": link
+                })
 
-    try:
-        # Extraire le match
-        match_element = driver.find_element(By.XPATH, '//div[contains(@class, "match-class")]')
-        match_info["Match"] = match_element.text
-    except NoSuchElementException:
-        match_info["Match"] = "N/A"
+            except Exception as e:
+                print(f"Erreur lors de l'extraction des informations pour le lien {link}: {e}")
+                continue
 
-    return match_info
+    except TimeoutException as e:
+        print(f"Erreur: {e}")
+
+    finally:
+        # Fermer le navigateur
+        driver.quit()
+
+    # Convertir les données en DataFrame pandas
+    return pd.DataFrame(match_data)
