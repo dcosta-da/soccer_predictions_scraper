@@ -5,7 +5,7 @@ from selenium.common.exceptions import NoSuchElementException, TimeoutException
 import pandas as pd
 import time
 
-def scrape_betclever(driver):
+def scrape_data(driver):
     match_data = []
 
     try:
