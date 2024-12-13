@@ -1,21 +1,18 @@
-name: Scraper Betclever Data
+name: Automate NHL Predictions
 
 on:
-  schedule:
-    - cron: '0 3 * * *'  # Exécution à 4h heure française en hiver (CET, UTC+1)
-    - cron: '0 2 * * *'  # Exécution à 4h heure française en été (CEST, UTC+2)
   push:
     branches:
       - main
+  schedule:
+    - cron: "0 0 * * *"  # Exécution quotidienne
 
 jobs:
-  run-scraper:
+  setup:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out the repository
-        uses: actions/checkout@v2
-
+      # Étape pour installer les dépendances Python
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -23,36 +20,19 @@ jobs:
 
       - name: Install dependencies
         run: |
+          python -m pip install --upgrade pip
           pip install -r requirements.txt
-          sudo apt-get update
-          sudo apt-get install -y wget curl unzip
-          # Install Google Chrome
-          sudo apt-get install -y google-chrome-stable
-          # Get the current version of Chrome installed
-          CHROME_VERSION=$(google-chrome --version | sed 's/[^0-9]*\([0-9]*\.[0-9]*\.[0-9]*\).[0-9]*/\1/')
-          echo "Chrome version is $CHROME_VERSION"
-          # Try downloading the ChromeDriver that matches the Chrome version
-          CHROMEDRIVER_VERSION=$(curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION)
-          
-          # If the specific version is not found, fall back to the latest version
-          if [ -z "$CHROMEDRIVER_VERSION" ]; then
-            echo "ChromeDriver version for Chrome $CHROME_VERSION not found. Trying the latest version."
-            CHROMEDRIVER_VERSION=$(curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
-          fi
 
-          # Download ChromeDriver
-          echo "Downloading ChromeDriver version $CHROMEDRIVER_VERSION"
-          wget https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip
+      # Étape pour télécharger ChromeDriver
+      - name: Download ChromeDriver
+        run: |
+          CHROME_VERSION=$(google-chrome-stable --version | awk '{print $3}')
+          CHROMEDRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION} || echo "latest")
+          wget https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip
           unzip chromedriver_linux64.zip
-          sudo mv chromedriver /usr/local/bin/chromedriver
-          sudo chown root:root /usr/local/bin/chromedriver
-          sudo chmod +x /usr/local/bin/chromedriver
+          sudo mv chromedriver /usr/local/bin/
 
-      - name: Verify Chrome and ChromeDriver installation
+      # Autres étapes (par exemple, exécuter des tests, déployer, etc.)
+      - name: Run tests
         run: |
-          google-chrome --version
-          chromedriver --version
-
-      - name: Run the scraper
-        run: |
-          python main.py
+          pytest tests/
