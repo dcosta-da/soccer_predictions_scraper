@@ -1,0 +1,31 @@
+name: Scraper Betclever Data
+
+on:
+  schedule:
+    - cron: '0 15 * * *'  # Exécution à 15h UTC (16h heure française en hiver, CET)
+    - cron: '0 14 * * *'  # Exécution à 14h UTC (16h heure française en été, CEST)
+  push:
+    branches:
+      - main
+
+jobs:
+  run-scraper:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          sudo apt-get install -y chromium-chromedriver
+
+      - name: Run the scraper
+        run: |
+          python main.py
