@@ -78,8 +78,8 @@ def scrape_data(driver):
                     "Odds 2.5": odds_2_5,
                     "Over 3.5 (%)": over_3_5,
                     "Odds 3.5": odds_3_5,
-                    "BTTS (%)": btts,
-                    "Odds BTTS": odds_btts,
+                    "Btts (%)": btts,
+                    "Odds btts": odds_btts,
                     "Link": link
                 })
 
