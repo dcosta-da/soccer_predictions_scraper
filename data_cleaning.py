@@ -4,7 +4,9 @@ import re
 def clean_data(match_data):
     df = pd.DataFrame(match_data)
 
-    # Nettoyer les données comme dans ton code original
+    df[['Country', 'Championship']] = df['Championship'].str.split(n=1, expand=True)
+    df['Match'] = df['Match'].str.replace('\n—\n', ' - ', regex=False)
+
     df['Date'] = df['Date'].apply(format_date)
     
     return df
