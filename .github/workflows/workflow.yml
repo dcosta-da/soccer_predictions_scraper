@@ -2,9 +2,11 @@ name: Workflow automation
 
 on:
   schedule:
-    # Planifier l'exécution tous les jours à 5h du matin heure française (3h UTC en hiver, 3h UTC en été)
-    - cron: '0 3 * * *' # 3h UTC (c'est 5h en France toute l'année)
-  workflow_dispatch: # Permet de lancer manuellement le workflow si nécessaire
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -54,5 +56,4 @@ jobs:
       run: |
         git push
       env:
-        # Nécessaire pour authentifier la requête
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
