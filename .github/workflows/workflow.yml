@@ -40,7 +40,7 @@ jobs:
       run: |
         python main.py
 
-     - name: Configure Git
+    - name: Configure Git
       run: |
         git config --global user.name "dcosta-da"
         git config --global user.email "damien.cds@gmail.com"
