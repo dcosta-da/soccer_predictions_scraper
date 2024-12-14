@@ -4,10 +4,14 @@ import re
 def clean_data(match_data):
     df = pd.DataFrame(match_data)
 
-    df[['Country', 'Championship']] = df['Championship'].str.split(n=1, expand=True)
-    df['Match'] = df['Match'].str.replace('\n—\n', ' - ', regex=False)
-
+    # Nettoyer les données comme dans ton code original
     df['Date'] = df['Date'].apply(format_date)
+    
+    # Diviser la colonne 'Championship' en 'Country' et 'Championship'
+    df[['Country', 'Championship']] = df['Championship'].str.split(n=1, expand=True)
+    
+    # Remplacer '\n—\n' dans la colonne 'Match'
+    df['Match'] = df['Match'].str.replace('\n—\n', ' - ', regex=False)
     
     return df
 
