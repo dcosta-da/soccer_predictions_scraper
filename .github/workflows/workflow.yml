@@ -1,4 +1,4 @@
-name: CI Pipeline
+name: Workflow automation
 
 on:
   schedule:
@@ -39,3 +39,20 @@ jobs:
     - name: Run the script
       run: |
         python main.py
+
+    - name: Configure Git
+      run: |
+        git config --global user.name "dcosta-da"
+        git config --global user.email "damien.cds@gmail.com"
+
+    - name: Commit Excel file
+      run: |
+        git add betclever_predictions.xlsx
+        git commit -m "Update Excel file with latest predictions"
+
+    - name: Push changes
+      run: |
+        git push
+      env:
+        # Nécessaire pour authentifier la requête
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
