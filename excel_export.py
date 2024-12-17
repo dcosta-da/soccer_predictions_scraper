@@ -7,7 +7,7 @@ def export_to_excel(df):
     sheets = {
     "Home win": df[(df['Home Win (%)'] >= 70) & (df['Home Odds'] >= 1.7)][['Date', 'Country', 'Championship', 'Match', 'Home Win (%)', 'Home Odds']],
     "Away Win": df[(df['Away Win (%)'] >= 70) & (df['Away Odds'] >= 1.7)][['Date', 'Country', 'Championship', 'Match', 'Away Win (%)', 'Away Odds']],
-    "Draw": df[df['Draw (%)'] >= 60][['Date', 'Country', 'Championship', 'Match', 'Draw (%)']],
+    "Draw": df[df['Draw (%)'] >= 60][['Date', 'Country', 'Championship', 'Match', 'Draw (%)', 'Draw Odds']],
     "Btts": df[(df['Btts (%)'] >= 75) & (df['Odds btts'] >= 1.7)][['Date', 'Country', 'Championship', 'Match', 'Btts (%)', 'Odds btts']],
     "Over_Under": df[
         ((df['Over 2.5 (%)'] >= 80) & (df['Odds 2.5'] >= 1.7)) |
