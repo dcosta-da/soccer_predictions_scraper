@@ -47,7 +47,7 @@ jobs:
 
     - name: Commit Excel file
       run: |
-        git add betclever_predictions.xlsx
+        git add scraper/data/betclever_predictions.xlsx 
         git commit -m "Update Excel file with latest predictions"
 
     - name: Push changes
