@@ -11,7 +11,7 @@ st.title('Betclever predictions')
 
 st.header('Home win')
 
-home_win = pd.read_excel('betclever_predictions.xlsx', sheet_name='Home win')
+home_win = pd.read_excel('scraper/data/betclever_predictions.xlsx', sheet_name='Home win')
 
 st.dataframe(home_win.style.background_gradient(subset=["Home Win (%)"]))
 
@@ -19,7 +19,7 @@ st.dataframe(home_win.style.background_gradient(subset=["Home Win (%)"]))
 
 st.header('Both team to score')
 
-btts = pd.read_excel('betclever_predictions.xlsx', sheet_name='Btts')
+btts = pd.read_excel('scraper/data/betclever_predictions.xlsx', sheet_name='Btts')
 
 st.dataframe(btts.style.background_gradient(subset=["Btts (%)"]))
 
@@ -27,7 +27,7 @@ st.dataframe(btts.style.background_gradient(subset=["Btts (%)"]))
 
 st.header('Over goals')
 
-over = pd.read_excel('betclever_predictions.xlsx', sheet_name='Over_Under')
+over = pd.read_excel('scraper/data/betclever_predictions.xlsx', sheet_name='Over_Under')
 
 st.dataframe(over.style.background_gradient(subset=["Over 2.5 (%)", "Over 3.5 (%)"]))
 
@@ -35,7 +35,7 @@ st.dataframe(over.style.background_gradient(subset=["Over 2.5 (%)", "Over 3.5 (%
 
 st.header('Away win')
 
-away_win = pd.read_excel('betclever_predictions.xlsx', sheet_name='Away Win')
+away_win = pd.read_excel('scraper/data/betclever_predictions.xlsx', sheet_name='Away Win')
 
 st.dataframe(away_win.style.background_gradient(subset=["Away Win (%)"]))
 
