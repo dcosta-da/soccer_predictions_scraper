@@ -38,7 +38,7 @@ jobs:
 
     - name: Run the script
       run: |
-        python main.py
+        python scraper/main.py
 
     - name: Configure Git
       run: |
@@ -47,7 +47,7 @@ jobs:
 
     - name: Commit Excel file
       run: |
-        git add betclever_predictions.xlsx 
+        git add . 
         git commit -m "Update Excel file with latest predictions"
 
     - name: Push changes

@@ -2,7 +2,11 @@ import os
 import pandas as pd
 
 def export_to_excel(df):
-    file_path = "betclever_predictions.xlsx"
+    base_dir = os.path.dirname(os.path.dirname(__file__)) 
+    data_dir = os.path.join(base_dir, "data") 
+    os.makedirs(data_dir, exist_ok=True)  
+
+    file_path = os.path.join(data_dir, "betclever_predictions.xlsx")
 
     sheets = {
     "Home win": df[(df['Home Win (%)'] >= 70) & (df['Home Odds'] >= 1.7)][['Date', 'Country', 'Championship', 'Match', 'Home Win (%)', 'Home Odds']],
