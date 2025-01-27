@@ -2,7 +2,12 @@ import os
 import pandas as pd
 
 def export_to_excel(df):
-    file_path = "scraper/data/betclever_predictions.xlsx"
+    file_path = "../data/betclever_predictions.xlsx"
+
+        # Vérifier si le dossier existe, sinon, le créer
+    data_dir = os.path.dirname(file_path)  # Extraire le répertoire du chemin
+    if not os.path.exists(data_dir):
+        os.makedirs(data_dir)  # Créer le répertoire s'il n'existe pas
 
     sheets = {
     "Home win": df[(df['Home Win (%)'] >= 70) & (df['Home Odds'] >= 1.7)][['Date', 'Country', 'Championship', 'Match', 'Home Win (%)', 'Home Odds']],
