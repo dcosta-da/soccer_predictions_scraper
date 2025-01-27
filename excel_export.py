@@ -2,7 +2,7 @@ import os
 import pandas as pd
 
 def export_to_excel(df):
-    file_path = "scraper/data/betclever_predictions.xlsx"
+    file_path = "betclever_predictions.xlsx"
 
     sheets = {
     "Home win": df[(df['Home Win (%)'] >= 70) & (df['Home Odds'] >= 1.7)][['Date', 'Country', 'Championship', 'Match', 'Home Win (%)', 'Home Odds']],
