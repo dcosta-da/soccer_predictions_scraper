@@ -1,9 +1,7 @@
-import time
-import os
-from selenium_config import configure_driver
-from scraper import scrape_data
-from data_cleaning import clean_data, process_data
-from excel_export import export_to_excel
+from functions.selenium_config import configure_driver
+from functions.scraper import scrape_data
+from functions.data_cleaning import clean_data, process_data
+from functions.excel_export import export_to_excel
 
 def main():
     # Configurer Selenium
