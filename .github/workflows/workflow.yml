@@ -47,7 +47,7 @@ jobs:
 
     - name: Commit Excel file
       run: |
-        git add . 
+        git add scraper/data 
         git commit -m "Update Excel file with latest predictions"
 
     - name: Push changes
