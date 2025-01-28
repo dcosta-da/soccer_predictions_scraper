@@ -1,10 +1,15 @@
 import streamlit as st
 import matplotlib 
 import pandas as pd
+from datetime import date, timedelta
 
 #st.set_page_config(page_title='Predictions', layout="wide", page_icon='🎯')
 
 st.title('Predictions')
+
+today = date.today()
+tomorrow = today + timedelta(1)
+st.text(f"Predictions for {today} and {tomorrow}")
 
 # Home win
 
