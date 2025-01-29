@@ -6,7 +6,7 @@ st.title("Home")
 st.header("What's Golden Goal ?", divider="blue")
 
 # Part 2
-st.header("What are the predictions available ?", divider="blue")
+st.header("What are the data available ?", divider="blue")
 
 st.text("Some text")
 st.markdown("""
