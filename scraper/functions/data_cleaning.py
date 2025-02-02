@@ -1,5 +1,7 @@
 import pandas as pd
 import re
+from datetime import datetime
+import pytz
 
 def clean_data(match_data):
     df = pd.DataFrame(match_data)
@@ -15,10 +17,25 @@ def clean_data(match_data):
     
     return df
 
+
+#def format_date(date_str):
+#    cleaned_date = date_str.replace('On ', '').split(' GMT')[0].strip()
+#    cleaned_date = re.sub(r'(th|st|nd|rd)', '', cleaned_date).strip()
+
+#    return pd.to_datetime(cleaned_date, format='%d %B %Y at %H:%M').strftime('%d-%m-%Y %H:%M')
+
+
 def format_date(date_str):
     cleaned_date = date_str.replace('On ', '').split(' GMT')[0].strip()
     cleaned_date = re.sub(r'(th|st|nd|rd)', '', cleaned_date).strip()
-    return pd.to_datetime(cleaned_date, format='%d %B %Y at %H:%M').strftime('%d-%m-%Y %H:%M')
+    
+    dt_gmt = datetime.strptime(cleaned_date, '%d %B %Y at %H:%M')
+    dt_gmt = pytz.timezone('GMT').localize(dt_gmt)
+
+    dt_paris = dt_gmt.astimezone(pytz.timezone('Europe/Paris'))
+
+    return dt_paris.strftime('%d-%m-%Y %H:%M')
+
 
 def process_data(df):
     # Nettoyer et convertir les colonnes numériques
