@@ -16,7 +16,7 @@ def export_to_excel(df):
     "Over_Under": df[
         ((df['Over 2.5 (%)'] >= 80) & (df['Odds 2.5'] >= 1.7)) |
         ((df['Over 3.5 (%)'] >= 50) & (df['Odds 3.5'] >= 2.2))
-    ][['Date', 'Country', 'Championship', 'Match', 'Over 2.5 (%)', 'Odds 2.5', 'Over 3.5 (%)', 'Odds 3.5']]
+    ][['Date', 'Country', 'Championship', 'Match', 'Over 2.5 (%)', 'Odds 2.5', 'Over 3.5 (%)', 'Odds 3.5']],
     }
     
     if os.path.exists(file_path):

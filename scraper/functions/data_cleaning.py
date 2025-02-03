@@ -34,3 +34,13 @@ def process_data(df):
         df[column] = pd.to_numeric(df[column], errors='coerce')
     
     return df
+
+
+def compute_ev(df):
+    df['EV home win'] = round(((df['Home Win (%)'] / 100) * ((df['Home Odds'] - 1))) - ((1 - (df['Home Win (%)'] / 100)) * 1), 2)
+    df['EV away win'] = round(((df['Away Win (%)'] / 100) * ((df['Away Odds'] - 1))) - ((1 - (df['Away Win (%)'] / 100)) * 1), 2)
+    df['EV btts'] = round(((df['Btts (%)'] / 100) * ((df['Odds btts'] - 1))) - ((1 - (df['Btts (%)'] / 100)) * 1), 2)
+    df['EV over 2.5'] = round(((df['Over 2.5 (%)'] / 100) * ((df['Odds 2.5'] - 1))) - ((1 - (df['Over 2.5 (%)'] / 100)) * 1), 2)
+    
+    return df
+

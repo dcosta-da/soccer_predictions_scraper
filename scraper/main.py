@@ -1,21 +1,18 @@
 from functions.selenium_config import configure_driver
 from functions.scraper import scrape_data
-from functions.data_cleaning import clean_data, process_data
+from functions.data_cleaning import clean_data, process_data, compute_ev
 from functions.excel_export import export_to_excel
 
 def main():
-    # Configurer Selenium
     driver = configure_driver()
 
     try:
-        # Scraper les données
         match_data = scrape_data(driver)
 
-        # Nettoyer et formater les données
         cleaned_data = clean_data(match_data)
-        final_data = process_data(cleaned_data)
+        processed_data = process_data(cleaned_data)
+        final_data = compute_ev(processed_data)
 
-        # Exporter les données vers un fichier Excel
         export_to_excel(final_data)
 
     finally:
