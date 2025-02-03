@@ -15,11 +15,10 @@ def export_to_excel(df):
     "Btts": df[(df['Btts (%)'] >= 75) & (df['Odds btts'] >= 1.7)][['Date', 'Country', 'Championship', 'Match', 'Btts (%)', 'Odds btts']],
     "Over_Under": df[
         ((df['Over 2.5 (%)'] >= 80) & (df['Odds 2.5'] >= 1.7)) |
-        ((df['Over 3.5 (%)'] >= 60) & (df['Odds 3.5'] >= 2.2))
+        ((df['Over 3.5 (%)'] >= 50) & (df['Odds 3.5'] >= 2.2))
     ][['Date', 'Country', 'Championship', 'Match', 'Over 2.5 (%)', 'Odds 2.5', 'Over 3.5 (%)', 'Odds 3.5']]
     }
     
-    # Si le fichier existe déjà, on l'ouvre en mode ajout
     if os.path.exists(file_path):
         with pd.ExcelWriter(file_path, mode="a", engine="openpyxl", if_sheet_exists="replace") as writer:
             for sheet_name, df_filtered in sheets.items():
