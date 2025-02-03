@@ -9,39 +9,31 @@ def scrape_data(driver):
     match_data = []
 
     try:
-        # Accéder à la page d'accueil de betclever.com
         driver.get("https://www.betclever.com")
 
-        # Attendre que le bouton "View More Games" soit cliquable
         wait = WebDriverWait(driver, 10)
         view_more_button = wait.until(
             EC.element_to_be_clickable((By.XPATH, '//*[@id="showmore"]/b'))
         )
         
-        # Cliquer sur le bouton "View More Games"
         view_more_button.click()
         print("Bouton 'View More Games' cliqué avec succès.")
 
-        # Attendre que les nouveaux éléments se chargent
         time.sleep(5)
 
-        # Récupérer les éléments "Match Tips"
         match_tips_elements = driver.find_elements(By.XPATH, '//a[contains(text(), "Match Tips")]')
         links = [element.get_attribute('href') for element in match_tips_elements]
         print("Liens 'Match Tips' récupérés avec succès.")
 
-        # Parcourir chaque lien pour extraire les données
         for link in links:
             driver.get(link)
-            time.sleep(3)  # Attendre le chargement complet de la page
+            time.sleep(3) 
 
             try:
-                # Extraction des informations spécifiques au match
                 date = driver.find_element(By.XPATH, '/html/body/div[1]/main/section[1]/div/div[1]/div[3]/p[1]').text
                 championship = driver.find_element(By.XPATH, '/html/body/div[1]/main/section[1]/div/div[1]/div[1]/div[1]').text
                 match = driver.find_element(By.XPATH, '/html/body/div[1]/main/section[1]/div/div[1]/div[1]/div[2]').text
 
-                # Section des prédictions "Match Result Predictions"
                 predictions_section = driver.find_element(By.XPATH, '/html/body/div[1]/main/section[2]/div/div[2]')
                 home_win = predictions_section.find_elements(By.CLASS_NAME, 'match-history__item-numbers')[0].text
                 home_odds = predictions_section.find_elements(By.CLASS_NAME, 'match-history__item-numbers')[1].text
@@ -50,7 +42,6 @@ def scrape_data(driver):
                 away_win = predictions_section.find_elements(By.CLASS_NAME, 'match-history__item-numbers')[4].text
                 away_odds = predictions_section.find_elements(By.CLASS_NAME, 'match-history__item-numbers')[5].text
 
-                # Section des prédictions "Total Goals Predictions"
                 total_goals_section = driver.find_element(By.XPATH, '/html/body/div[1]/main/section[4]/div/div[2]')
                 over_1_5 = total_goals_section.find_elements(By.CLASS_NAME, 'match-history__item-numbers')[0].text
                 odds_1_5 = total_goals_section.find_elements(By.CLASS_NAME, 'match-history__item-numbers')[1].text
@@ -61,7 +52,6 @@ def scrape_data(driver):
                 btts = total_goals_section.find_elements(By.CLASS_NAME, 'match-history__item-numbers')[6].text
                 odds_btts = total_goals_section.find_elements(By.CLASS_NAME, 'match-history__item-numbers')[7].text
 
-                # Ajouter les données au tableau
                 match_data.append({
                     "Date": date,
                     "Championship": championship,
@@ -91,8 +81,6 @@ def scrape_data(driver):
         print(f"Erreur: {e}")
 
     finally:
-        # Fermer le navigateur
         driver.quit()
 
-    # Convertir les données en DataFrame pandas
     return pd.DataFrame(match_data)

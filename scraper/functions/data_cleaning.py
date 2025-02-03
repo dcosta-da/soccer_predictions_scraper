@@ -6,13 +6,10 @@ import pytz
 def clean_data(match_data):
     df = pd.DataFrame(match_data)
 
-    # Nettoyer les données comme dans ton code original
     df['Date'] = df['Date'].apply(format_date)
     
-    # Diviser la colonne 'Championship' en 'Country' et 'Championship'
     df[['Country', 'Championship']] = df['Championship'].str.split(n=1, expand=True)
     
-    # Remplacer '\n—\n' dans la colonne 'Match'
     df['Match'] = df['Match'].str.replace('\n—\n', ' - ', regex=False)
     
     return df
@@ -31,7 +28,6 @@ def format_date(date_str):
 
 
 def process_data(df):
-    # Nettoyer et convertir les colonnes numériques
     columns_to_convert = ['Home Win (%)', 'Home Odds', 'Draw (%)', 'Draw Odds', 'Away Win (%)', 'Away Odds', 'Over 1.5 (%)', 'Odds 1.5', 'Over 2.5 (%)', 'Odds 2.5', 'Over 3.5 (%)', 'Odds 3.5', 'Btts (%)', 'Odds btts']
     for column in columns_to_convert:
         df[column] = df[column].str.replace('%', '').str.strip()
