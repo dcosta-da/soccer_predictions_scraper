@@ -39,7 +39,7 @@ st.dataframe(over.style.background_gradient(subset=["Over 2.5 (%)", "Over 3.5 (%
 
 st.header('Away win', divider="blue")
 
-away_win = pd.read_excel('scraper/data/betclever_predictions.xlsx', sheet_name='Away Win')
+away_win = pd.read_excel('scraper/data/betclever_predictions.xlsx', sheet_name='Away win')
 
 st.dataframe(away_win.style.background_gradient(subset=["Away Win (%)"]))
 
