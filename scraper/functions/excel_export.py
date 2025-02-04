@@ -17,7 +17,7 @@ def export_to_excel(df):
         ((df['Over 2.5 (%)'] >= 80) & (df['Odds 2.5'] >= 1.7)) |
         ((df['Over 3.5 (%)'] >= 50) & (df['Odds 3.5'] >= 2.2))][['Date', 'Country', 'Championship', 'Match', 'Over 2.5 (%)', 'Odds 2.5', 'Over 3.5 (%)', 'Odds 3.5']],
     "EV Home win" : df[df['Home Odds'] >= 1.7][['Date', 'Country', 'Championship', 'Match', 'Home Win (%)', 'Home Odds', 'EV home win']],
-    "EV Away win" : df[df['Away Odds'] >= 1.7][['Date', 'Country', 'Championship', 'Match', 'Away Win (%)', 'Away Odds' 'EV away win']],
+    "EV Away win" : df[df['Away Odds'] >= 1.7][['Date', 'Country', 'Championship', 'Match', 'Away Win (%)', 'Away Odds', 'EV away win']],
     "EV Over 2.5" : df[df['Odds 2.5'] >= 1.7][['Date', 'Country', 'Championship', 'Match', 'Over 2.5 (%)', 'Odds 2.5', 'EV over 2.5']],
     "EV Btts" : df[df['Odds btts'] >= 1.7][['Date', 'Country', 'Championship', 'Match', 'Btts (%)', 'Odds btts', 'EV btts']],
     }
