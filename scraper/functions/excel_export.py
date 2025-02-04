@@ -20,7 +20,6 @@ def export_to_excel(df):
     "EV Away win" : df[df['Away Odds'] >= 1.7][['Date', 'Country', 'Championship', 'Match', 'Away Win (%)', 'Away Odds' 'EV away win']],
     "EV Over 2.5" : df[df['Odds 2.5'] >= 1.7][['Date', 'Country', 'Championship', 'Match', 'Over 2.5 (%)', 'Odds 2.5', 'EV over 2.5']],
     "EV Btts" : df[df['Odds btts'] >= 1.7][['Date', 'Country', 'Championship', 'Match', 'Btts (%)', 'Odds btts', 'EV btts']],
-
     }
     
     if os.path.exists(file_path):
