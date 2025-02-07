@@ -41,8 +41,6 @@ def scrape_data(driver):
                 away_odds = predictions_section.find_elements(By.CLASS_NAME, 'match-history__item-numbers')[5].text
 
                 total_goals_section = driver.find_element(By.XPATH, '/html/body/div[1]/main/section[4]/div/div[2]')
-                over_1_5 = total_goals_section.find_elements(By.CLASS_NAME, 'match-history__item-numbers')[0].text
-                odds_1_5 = total_goals_section.find_elements(By.CLASS_NAME, 'match-history__item-numbers')[1].text
                 over_2_5 = total_goals_section.find_elements(By.CLASS_NAME, 'match-history__item-numbers')[2].text
                 odds_2_5 = total_goals_section.find_elements(By.CLASS_NAME, 'match-history__item-numbers')[3].text
                 over_3_5 = total_goals_section.find_elements(By.CLASS_NAME, 'match-history__item-numbers')[4].text
@@ -58,8 +56,6 @@ def scrape_data(driver):
                     "Home Odds": home_odds,
                     "Away Win (%)": away_win,
                     "Away Odds": away_odds,
-                    "Over 1.5 (%)": over_1_5,
-                    "Odds 1.5": odds_1_5,
                     "Over 2.5 (%)": over_2_5,
                     "Odds 2.5": odds_2_5,
                     "Over 3.5 (%)": over_3_5,
