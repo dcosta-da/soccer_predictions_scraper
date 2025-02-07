@@ -37,8 +37,6 @@ def scrape_data(driver):
                 predictions_section = driver.find_element(By.XPATH, '/html/body/div[1]/main/section[2]/div/div[2]')
                 home_win = predictions_section.find_elements(By.CLASS_NAME, 'match-history__item-numbers')[0].text
                 home_odds = predictions_section.find_elements(By.CLASS_NAME, 'match-history__item-numbers')[1].text
-                draw = predictions_section.find_elements(By.CLASS_NAME, 'match-history__item-numbers')[2].text
-                draw_odds = predictions_section.find_elements(By.CLASS_NAME, 'match-history__item-numbers')[3].text
                 away_win = predictions_section.find_elements(By.CLASS_NAME, 'match-history__item-numbers')[4].text
                 away_odds = predictions_section.find_elements(By.CLASS_NAME, 'match-history__item-numbers')[5].text
 
@@ -58,8 +56,6 @@ def scrape_data(driver):
                     "Match": match,
                     "Home Win (%)": home_win,
                     "Home Odds": home_odds,
-                    "Draw (%)": draw,
-                    "Draw Odds": draw_odds,
                     "Away Win (%)": away_win,
                     "Away Odds": away_odds,
                     "Over 1.5 (%)": over_1_5,
