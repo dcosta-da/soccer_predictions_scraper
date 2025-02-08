@@ -24,7 +24,7 @@ def format_date(date_str):
 
     dt_paris = dt_gmt.astimezone(pytz.timezone('Europe/Paris'))
 
-    return dt_paris.strftime('%d-%m-%Y %H:%M')
+    return dt_paris 
 
 
 def process_data(df):
