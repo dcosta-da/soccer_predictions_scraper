@@ -2,7 +2,6 @@ import streamlit as st
 import matplotlib 
 import pandas as pd
 from datetime import date, timedelta
-import os
 
 st.title('Expected value based predictions')
 
@@ -10,8 +9,7 @@ today = date.today()
 tomorrow = today + timedelta(1)
 st.text(f"Predictions for {today} and {tomorrow}")
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-file_path = os.path.join(BASE_DIR, "scraper/data/betclever_predictions.xlsx")
+file_path = "scraper/data/betclever_predictions.xlsx"
 
 
 # Home win
