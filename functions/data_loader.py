@@ -20,7 +20,7 @@ def display_proba_dataframe(sheet_name, prob_col, title):
     min_proba, max_proba = df[prob_col].min(), df[prob_col].max()
     
     with col1:
-        selected_championships = st.multiselect("Choose one or many championship(s)", championships_selection)
+        selected_championships = st.multiselect("Choose one or many championship(s)", championships_selection, placeholder="Championships available")
     
     with col2:
         selected_proba = st.slider('Choose the minimum probability', min_value=min_proba, max_value=max_proba)
@@ -48,7 +48,7 @@ def display_ev_dataframe(sheet_name, col_filter_1, value_1, col_filter_2, value_
     min_proba, max_proba = df_filtered[col_filter_2].min(), df_filtered[col_filter_2].max()
 
     with col1:
-        selected_championships = st.multiselect("Choose one or many championship(s)", championships_selection)
+        selected_championships = st.multiselect("Choose one or many championship(s)", championships_selection, placeholder="Championships available")
 
     with col2:
         selected_proba = st.slider('Choose the minimum EV', min_value=min_proba, max_value=max_proba)
