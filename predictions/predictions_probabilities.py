@@ -11,12 +11,31 @@ st.text(f"Predictions for {today} and {tomorrow}")
 
 file_path = "scraper/data/betclever_predictions.xlsx"
 
-
-# Home win
+############
+# Home win #
+############
 
 st.header('Home win', divider="red")
 
-home_win = pd.read_excel(file_path, sheet_name='Home win')
+col1, col2 = st.columns(2)
+
+home_win = pd.read_excel(file_path, sheet_name="Home win")
+championships_selection = sorted((home_win["Country"] + " - " + home_win["Championship"]).unique())
+min_proba, max_proba = home_win["Home Win (%)"].min(),home_win["Home Win (%)"].max(),
+
+with col1:
+    selected_championship = st.multiselect("Choose one or many championship(s)", championships_selection)
+
+with col2:
+    selected_proba = st.slider('Choose minimum probability', min_value=min_proba, max_value=max_proba)
+
+st.write("")
+
+if selected_championship:  
+    home_win = home_win[(home_win["Country"] + " - " + home_win["Championship"]).isin(selected_championship)]
+
+if selected_proba != min_proba :  
+    home_win = home_win[home_win["Home Win (%)"] >= selected_proba]
 
 st.dataframe(home_win.style.background_gradient(subset=["Home Win (%)"], cmap='Reds'))
 

@@ -40,6 +40,8 @@ st.markdown("""##### Both teams to score""")
 
 st.markdown("""##### Over goals""")
 
+st.write("")
+
 st.subheader("Expected value based predictions")
 
 st.latex(r"""EV = (P_\text{win} \times (\text{Odds} - 1) \times \text{Stake}) - ((1 - P_{win}) \times \text{Stake})""")
