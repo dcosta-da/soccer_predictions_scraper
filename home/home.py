@@ -25,7 +25,9 @@ st.header("What's Golden Goal ?", divider="blue")
 # Part 2
 st.header("What predictions are displayed ?", divider="blue")
 
-st.subheader('Home & Away win')
+st.subheader('Probability based predictions')
+
+st.markdown("""##### Home & Away win""")
 
 st.text("Some text")
 st.markdown("""
@@ -34,6 +36,23 @@ st.markdown("""
             """)
 st.write("Some text")
 
-st.subheader("Both teams to score")
+st.markdown("""##### Both teams to score""")
 
-st.subheader("Over goals")
+st.markdown("""##### Over goals""")
+
+st.subheader("Expected value based predictions")
+
+st.latex(r"""EV = (P_\text{win} \times (\text{Odds} - 1) \times \text{Stake}) - ((1 - P_{win}) \times \text{Stake})""")
+
+st.markdown(r"""
+$Where$
+- $P_\text{win} = \text{Estimated probability of winning (e.g. 70\% = 0.70)}$
+- $\text{Odds} = \text{Betting odds (decimal format)}$
+- $\text{Stake} = \text{Amount wagered}$
+- $(\text{Odds} - 1) \times \text{Stake} = \text{Net profit if the bet wins}$
+- $(1 - P_{\text{win}}) \times \text{Stake} = \text{Total loss if the bet loses}$
+        
+""")
+
+
+
