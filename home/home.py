@@ -1,8 +1,13 @@
 import streamlit as st
 
+st.set_page_config(page_title="Golden goal", page_icon="⚽")
+
 st.title("Home")
 
-# Part 1
+##########
+# Part 1 #
+##########
+
 st.header("What's Golden Goal ?", divider="red")
 
 # st.markdown(
@@ -22,9 +27,13 @@ st.header("What's Golden Goal ?", divider="red")
 # - This is not an incentive to bet : this streamlit application will in no way be held responsible for any potential financial losses linked to betting. 
 # """)
 
-# Part 2
+##########
+# Part 2 #
+##########
+
 st.header("What predictions are displayed ?", divider="red")
 
+# Part 2a
 st.subheader('Probability based predictions')
 
 st.markdown("""##### Home & Away win""")
@@ -38,11 +47,22 @@ st.write("Some text")
 
 st.markdown("""##### Both teams to score""")
 
-st.markdown("""##### Over goals""")
+st.markdown("""##### Over 2.5 goals""")
 
+# Line break
 st.write("")
 
+# Part 2b
 st.subheader("Expected value based predictions")
+
+st.markdown("""
+            In the context of sports betting, the **Expected Value** (EV) is a calculation that **estimates the average 
+            gain or loss of a bet in the long run**. It takes into account the estimated probabilities of an event 
+            as well as the odds offered by bookmakers to **determine whether a bet is profitable or not in the long term**.
+
+            In the predictions page based on expected value, the estimated probabilities as well as the odds are provided 
+            by the scraped probabilities. The stake is based on a flat bet of 1€. The expected value is then calculated as follows:
+            """)
 
 st.latex(r"""EV = (P_\text{win} \times (\text{Odds} - 1) \times \text{Stake}) - ((1 - P_{win}) \times \text{Stake})""")
 

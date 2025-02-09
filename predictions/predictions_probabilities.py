@@ -2,6 +2,8 @@ import streamlit as st
 from datetime import date, timedelta
 from functions.data_loader import display_proba_dataframe
 
+st.set_page_config(page_title="Golden goal", page_icon="⚽", layout="wide")
+
 st.title('Probability based predictions')
 
 today = date.today()

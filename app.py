@@ -13,7 +13,7 @@ pg = st.navigation(
     }
 )
 
-st.set_page_config(page_title="Golden goal", page_icon="⚽", layout="wide")
+
 
 pg.run()
 
