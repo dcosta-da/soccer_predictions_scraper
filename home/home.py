@@ -3,7 +3,7 @@ import streamlit as st
 st.title("Home")
 
 # Part 1
-st.header("What's Golden Goal ?", divider="blue")
+st.header("What's Golden Goal ?", divider="red")
 
 # st.markdown(
 # """
@@ -23,7 +23,7 @@ st.header("What's Golden Goal ?", divider="blue")
 # """)
 
 # Part 2
-st.header("What predictions are displayed ?", divider="blue")
+st.header("What predictions are displayed ?", divider="red")
 
 st.subheader('Probability based predictions')
 
