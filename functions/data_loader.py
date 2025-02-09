@@ -12,7 +12,7 @@ def load_data(file_path, sheet_name):
 def display_proba_dataframe(sheet_name, prob_col, title):
     st.header(title, divider="red")
     
-    col1, col2 = st.columns(2, gap="large")
+    col1, col2 = st.columns(2)
     
     df = load_data(file_path, sheet_name)
     
@@ -42,7 +42,7 @@ def display_ev_dataframe(sheet_name, col_filter_1, value_1, col_filter_2, value_
     df = load_data(file_path, sheet_name)
     df_filtered = df[(df[col_filter_1] >= value_1) & (df[col_filter_2] >= value_2)]
 
-    col1, col2 = st.columns(2, gap="large")
+    col1, col2 = st.columns(2)
 
     championships_selection = sorted((df_filtered["Country"] + " - " + df_filtered["Championship"]).unique())
     min_proba, max_proba = df_filtered[col_filter_2].min(), df_filtered[col_filter_2].max()

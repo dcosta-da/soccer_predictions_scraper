@@ -37,7 +37,8 @@ st.subheader('Probability based predictions')
 
 st.markdown("""
 Golden Goal displays predictions based on the **probabilities provided by Betclever's algorithm**. We don't know exactly how 
-it is developed, but we do know :
+it is developed, but :
+            
 > - *An advanced football predictions algorithm that has been developed over a period of ten years 
 by some of the best football betting experts and professional gamblers - it contains data from over 20 years 
 of football matches all over the world.*
