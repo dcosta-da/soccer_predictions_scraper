@@ -4,7 +4,7 @@ from functions.data_loader import display_ev_dataframe
 
 st.set_page_config(page_title="Golden goal", page_icon="⚽", layout="wide")
 
-st.title('Expected value based predictions')
+st.title('📈 Expected value based predictions')
 
 today = date.today()
 tomorrow = today + timedelta(1)
