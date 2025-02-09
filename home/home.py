@@ -15,8 +15,8 @@ st.markdown(
 **Golden Goal** is a streamlit application that displays some of the predictions offered for free on Betclever website 
 on different football match outcomes. 
 
-Betclever is a serious site that offers free daily predictions on a very large number of football championships for
-the main markets.
+Betclever is a serious site that offers free daily predictions on a very large number of majors and minor football 
+championships.
 
 This app was created for **personal betting strategies** and share an use case on how to optimise the data shared 
 on Betclever. 
