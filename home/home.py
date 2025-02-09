@@ -64,7 +64,7 @@ st.markdown("""
             by the scraped probabilities. The stake is based on a flat bet of 1€. The expected value is then calculated as follows:
             """)
 
-st.latex(r"""EV = (P_\text{win} \times (\text{Odds} - 1) \times \text{Stake}) - ((1 - P_{win}) \times \text{Stake})""")
+st.latex(r"""\text{EV = } (P_\text{win} \times (\text{Odds} - 1) \times \text{Stake}) - ((1 - P_{win}) \times \text{Stake})""")
 
 st.markdown(r"""
 $Where$
