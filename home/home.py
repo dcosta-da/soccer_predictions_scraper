@@ -83,17 +83,15 @@ The expected value is then calculated as follows :
 
 st.latex(r"""\text{EV = } (P_\text{win} \times (\text{Odds} - 1) \times \text{Stake}) - ((1 - P_{win}) \times \text{Stake})""")
 
-st.markdown(r"""
-$Where$
-- $P_\text{win} = \text{Estimated probability of winning (e.g. 70\% = 0.70)}$
-- $\text{Odds} = \text{Betting odds (decimal format)}$
-- $\text{Stake} = \text{Amount wagered}$
-- $(\text{Odds} - 1) \times \text{Stake} = \text{Net profit if the bet wins}$
-- $(1 - P_{\text{win}}) \times \text{Stake} = \text{Total loss if the bet loses}$
-        
+st.markdown("""
+Where :
+- Pwin = Estimated probability of winning (e.g. 70\% = 0.70)
+- Odds = Betting odds (decimal format)
+- Stake = Amount wagered}$
+- (Odds - 1) x Stake = Net profit if the bet wins
+- (1 - Pwin) x Stake = Total loss if the bet loses
 """)
 
-st.text("")
 st.markdown("""
 In the predictions page based on expected value, the estimated probabilities as well as the odds are provided 
 by Betclever data. The stake is based on a flat bet of 1€.
