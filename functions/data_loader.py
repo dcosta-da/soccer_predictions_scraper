@@ -4,17 +4,13 @@ import pandas as pd
 
 file_path = "scraper/data/betclever_predictions.xlsx"
 
-@st.cache_data
-def load_data(file_path, sheet_name):
-    return pd.read_excel(file_path, sheet_name=sheet_name)
-
 
 def display_proba_dataframe(sheet_name, prob_col, title):
     st.header(title, divider="red")
     
     col1, col2 = st.columns(2)
     
-    df = load_data(file_path, sheet_name)
+    df = pd.read_excel(file_path, sheet_name=sheet_name)
     
     championships_selection = sorted((df["Country"] + " - " + df["Championship"]).unique())
     min_proba, max_proba = df[prob_col].min(), df[prob_col].max()
@@ -39,7 +35,7 @@ def display_proba_dataframe(sheet_name, prob_col, title):
 def display_ev_dataframe(sheet_name, col_filter_1, value_1, col_filter_2, value_2, title):
     st.header(title, divider="red")
 
-    df = load_data(file_path, sheet_name)
+    df = pd.read_excel(file_path, sheet_name=sheet_name)
     df_filtered = df[(df[col_filter_1] >= value_1) & (df[col_filter_2] >= value_2)]
 
     col1, col2 = st.columns(2)
