@@ -49,20 +49,26 @@ but also over/under, both teams to score, and others.*
 
 > - *Our experts research extensively and track all data points and predictions over time to refine our betting tip 
 algorithm to make it more and more accurate over time.*
+            
+Not all predictions offered by Betclever are displayed here. In order to follow our betting strategy, we have applied some 
+filters according to the market type.
 """)
 
-st.markdown("""##### Home & Away win""")
-
-st.text("Some text")
 st.markdown("""
-            - item 1
-            - item 2
-            """)
-st.write("Some text")
-
-st.markdown("""##### Both teams to score""")
-
-st.markdown("""##### Over 2.5 goals""")
+##### Home & Away win
+- **Probability** of winning greater than or equal to **70% AND**
+- **Odds** greater than or equal to **1.70**
+            
+##### Both teams to score
+- **Probability** of both team to score greater than or equal to **75% AND**
+- **Odds** greater than or equal to **1.70**
+            
+##### Over 2.5 goals
+- **Probability** of over 2.5 goals greater than or equal to **80% AND**
+- **Odds** greater than or equal to **1.70 OR** 
+- **Probability** of over 3.5 goals greater than or equal to **60% AND**
+- **Odds** greater than or equal to **2.20 OR** 
+""")
 
 # Line break
 st.write("")
@@ -90,11 +96,27 @@ Where :
 - Stake = Amount wagered}$
 - (Odds - 1) x Stake = Net profit if the bet wins
 - (1 - Pwin) x Stake = Total loss if the bet loses
-""")
-
-st.markdown("""
+            
 In the predictions page based on expected value, the estimated probabilities as well as the odds are provided 
 by Betclever data. The stake is based on a flat bet of 1€.
+            
+To keep up with our betting strategy and not provide all the predictions, we have applied some 
+filters according to the market type.
+            
+##### Home & Away win
+- **Probability** of winning greater than or equal to **50% AND**
+- **Odds** greater than or equal to **1.70 AND**
+- **EV** greater than or equal to **0.40€**
+            
+##### Both teams to score
+- **Probability** of both team to score greater than or equal to **65% AND**
+- **Odds** greater than or equal to **1.70 AND**
+- **EV** greater than or equal to **0.40€**
+            
+##### Over 2.5 goals
+- **Probability** of over 2.5 goals greater than or equal to **70% AND**
+- **Odds** greater than or equal to **1.70 OR** 
+- **EV** greater than or equal to **0.40€**
 """)
 
 
