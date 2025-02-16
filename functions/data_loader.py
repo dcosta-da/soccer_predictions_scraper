@@ -68,7 +68,7 @@ def display_ev_dataframe(sheet_name, ev_filter_col, ev_value, title):
     st.write("")
 
     if selected_date:
-        df = df[df['Date'].dt.date == selected_date]  
+        df_filtered = df_filtered[df_filtered['Date'].dt.date == selected_date]  
 
     if selected_championships:
         df_filtered = df_filtered[(df_filtered["Country"] + " - " + df_filtered["Championship"]).isin(selected_championships)]
