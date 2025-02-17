@@ -19,7 +19,7 @@ Betclever is a serious site that offers free daily predictions on a very large n
 championships.
 
 This app was created for **personal betting strategies** and share an use case on how to optimise the data shared 
-on Betclever. 
+on Betclever. You can fin more informations about the strategy on Results page.
 
 ⚠️ **Disclaimer** 
 - *Golden Goal is by no means a replacement site for Betclever, so feel free to visit the site daily and follow it on its social networks.*
