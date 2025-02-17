@@ -21,7 +21,7 @@ championships.
 This app was created for **personal betting strategies** and share an use case on how to optimise the data shared 
 on Betclever. 
 
-You can find more informations about the strategy on Results page.
+You can find more informations about the betting strategy on Results page.
 
 ⚠️ **Disclaimer** 
 - *Golden Goal is by no means a replacement site for Betclever, so feel free to visit the site daily and follow it on its social networks.*
