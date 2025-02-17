@@ -6,10 +6,13 @@ predictions_probabilities_page = st.Page("predictions/predictions_probabilities.
 
 predictions_ev_page = st.Page("predictions/predictions_expected_values.py", title="Expected values", icon=":material/trending_up:")
 
+results_page = st.Page("results.py", title="Profit/loss", icon=":material/euro:")
+
 pg = st.navigation(
     {
         "Home": [home_page],
-        "Predictions": [predictions_probabilities_page, predictions_ev_page]
+        "Predictions": [predictions_probabilities_page, predictions_ev_page],
+        "Results": [results_page]
     }
 )
 
