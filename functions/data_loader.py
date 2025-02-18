@@ -18,6 +18,9 @@ def display_proba_dataframe(sheet_name, prob_col, title):
     min_date, max_date = df['Date'].min().date(), df['Date'].max().date()
     championships_selection = sorted((df["Country"] + " - " + df["Championship"]).unique())
     min_proba, max_proba = df[prob_col].min(), df[prob_col].max()
+
+    if min_proba == max_proba:
+        max_proba += 1
     
     with col1:
         selected_date = st.date_input("Choose a date", value=date.today(), format="YYYY-MM-DD", min_value=min_date, max_value=max_date, key=f"date_input_{sheet_name}")
