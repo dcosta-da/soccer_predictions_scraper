@@ -26,10 +26,10 @@ def display_proba_dataframe(sheet_name, prob_col, title):
         selected_date = st.date_input("Choose a date", value=date.today(), format="YYYY-MM-DD", min_value=min_date, max_value=max_date, key=f"date_input_{sheet_name}")
     
     with col2:
-        selected_championships = st.multiselect("Choose one or many championship(s)", championships_selection, placeholder="Championships available")
+        selected_championships = st.multiselect("Choose one or many championship(s)", championships_selection, placeholder="Championships available", key=f"select_champ_{sheet_name}")
 
     with col3:
-        selected_proba = st.slider("Choose the minimum probability", min_value=min_proba, max_value=max_proba)
+        selected_proba = st.slider("Choose the minimum probability", min_value=min_proba, max_value=max_proba, key=f"slider_proba_{sheet_name}")
     
     st.write("")
 
@@ -63,10 +63,10 @@ def display_ev_dataframe(sheet_name, ev_filter_col, ev_value, title):
         selected_date = st.date_input("Choose a date", value=date.today(), format="YYYY-MM-DD", min_value=min_date, max_value=max_date, key=f"date_input_{sheet_name}")
     
     with col2:
-        selected_championships = st.multiselect("Choose one or many championship(s)", championships_selection, placeholder="Championships available")
+        selected_championships = st.multiselect("Choose one or many championship(s)", championships_selection, placeholder="Championships available", key=f"select_champ_{sheet_name}")
 
     with col3:
-        selected_proba = st.slider('Choose the minimum EV', min_value=min_ev, max_value=max_ev)
+        selected_proba = st.slider('Choose the minimum EV', min_value=min_ev, max_value=max_ev, key=f"slider_proba_{sheet_name}")
 
     st.write("")
 
