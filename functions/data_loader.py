@@ -23,7 +23,7 @@ def display_proba_dataframe(sheet_name, prob_col, title):
         max_proba += 1
     
     with col1:
-        selected_date = st.date_input("Choose a date", value=date.today(), format="YYYY-MM-DD", min_value=min_date, max_value=max_date, key=f"date_input_{sheet_name}")
+        selected_date = st.date_input("Choose a date", value=min_date, format="YYYY-MM-DD", min_value=min_date, max_value=max_date, key=f"date_input_{sheet_name}")
     
     with col2:
         selected_championships = st.multiselect("Choose one or many championship(s)", championships_selection, placeholder="Championships available", key=f"select_champ_{sheet_name}")
