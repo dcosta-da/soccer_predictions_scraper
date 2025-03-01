@@ -13,7 +13,8 @@ def display_proba_dataframe(sheet_name, prob_col, title):
     
     df = pd.read_excel(file_path, sheet_name=sheet_name)
     
-    df['Date'] = pd.to_datetime(df['Date'])
+    #df['Date'] = pd.to_datetime(df['Date']) 
+    df['Date'] = pd.to_datetime(df['Date'], format="%d-%m-%Y %H:%M", errors="coerce")
 
     min_date, max_date = df['Date'].min().date(), df['Date'].max().date()
     championships_selection = sorted((df["Country"] + " - " + df["Championship"]).unique())
@@ -49,7 +50,8 @@ def display_ev_dataframe(sheet_name, ev_filter_col, ev_value, title):
     st.header(title, divider="red")
 
     df = pd.read_excel(file_path, sheet_name=sheet_name)
-    df['Date'] = pd.to_datetime(df['Date'])
+    #df['Date'] = pd.to_datetime(df['Date'])
+    df['Date'] = pd.to_datetime(df['Date'], format="%d-%m-%Y %H:%M", errors="coerce")
 
     df_filtered = df[df[ev_filter_col] >= ev_value]
 
