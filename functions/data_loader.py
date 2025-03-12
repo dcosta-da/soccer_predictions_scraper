@@ -21,7 +21,7 @@ def display_proba_dataframe(sheet_name, prob_col, title):
     min_proba, max_proba = df[prob_col].min(), df[prob_col].max()
 
     if min_proba == max_proba:
-        max_proba += 0.01
+        max_proba += 1
     
     with col1:
         selected_date = st.date_input("Choose a date", value=min_date, format="YYYY-MM-DD", min_value=min_date, max_value=max_date, key=f"date_input_{sheet_name}")
@@ -62,7 +62,7 @@ def display_ev_dataframe(sheet_name, ev_filter_col, ev_value, title):
     min_ev, max_ev = df_filtered[ev_filter_col].min(), df_filtered[ev_filter_col].max()
 
     if min_ev == max_ev:
-        max_ev += 1
+        max_ev += 0.01
 
     with col1:
         selected_date = st.date_input("Choose a date", value=min_date, format="YYYY-MM-DD", min_value=min_date, max_value=max_date, key=f"date_input_{sheet_name}")
