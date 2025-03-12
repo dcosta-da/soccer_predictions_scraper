@@ -61,6 +61,9 @@ def display_ev_dataframe(sheet_name, ev_filter_col, ev_value, title):
     championships_selection = sorted((df_filtered["Country"] + " - " + df_filtered["Championship"]).unique())
     min_ev, max_ev = df_filtered[ev_filter_col].min(), df_filtered[ev_filter_col].max()
 
+    if min_ev == max_ev:
+        max_ev += 0.1
+
     with col1:
         selected_date = st.date_input("Choose a date", value=min_date, format="YYYY-MM-DD", min_value=min_date, max_value=max_date, key=f"date_input_{sheet_name}")
     
