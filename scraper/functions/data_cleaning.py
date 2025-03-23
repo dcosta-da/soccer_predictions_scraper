@@ -4,33 +4,33 @@ from datetime import datetime
 import pytz
 import numpy as np
 
-# def clean_data(match_data):
-#     df = pd.DataFrame(match_data)
-
-#     df['Date'] = df['Date'].apply(format_date)
-    
-#     df[['Country', 'Championship']] = df['Championship'].str.split(n=1, expand=True)
-    
-#     df['Match'] = df['Match'].str.replace('\n—\n', ' - ', regex=False)
-    
-#     return df
-
 def clean_data(match_data):
     df = pd.DataFrame(match_data)
 
-    # Vérification si la colonne 'Date' existe
-    if 'Date' in df.columns:
-        df['Date'] = df['Date'].apply(format_date)
-    else:
-        print("La colonne 'Date' est absente des données, remplacement par NaN.")
-        # Remplacer les valeurs manquantes par NaN
-        df['Date'] = np.nan
-
+    df['Date'] = df['Date'].apply(format_date)
+    
     df[['Country', 'Championship']] = df['Championship'].str.split(n=1, expand=True)
     
     df['Match'] = df['Match'].str.replace('\n—\n', ' - ', regex=False)
     
     return df
+
+# def clean_data(match_data):
+#     df = pd.DataFrame(match_data)
+
+#     # Vérification si la colonne 'Date' existe
+#     if 'Date' in df.columns:
+#         df['Date'] = df['Date'].apply(format_date)
+#     else:
+#         print("La colonne 'Date' est absente des données, remplacement par NaN.")
+#         # Remplacer les valeurs manquantes par NaN
+#         df['Date'] = np.nan
+
+#     df[['Country', 'Championship']] = df['Championship'].str.split(n=1, expand=True)
+    
+#     df['Match'] = df['Match'].str.replace('\n—\n', ' - ', regex=False)
+    
+#     return df
 
 
 def format_date(date_str):
