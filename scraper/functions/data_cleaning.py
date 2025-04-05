@@ -15,21 +15,50 @@ import numpy as np
     
 #     return df
 
+# def clean_data(match_data):
+#     df = pd.DataFrame(match_data)
+
+#     # Vérification si la colonne 'Date' existe
+#     if 'Date' in df.columns:
+#         df['Date'] = df['Date'].apply(format_date)
+#     else:
+#         print("La colonne 'Date' est absente des données, remplacement par NaN.")
+#         # Remplacer les valeurs manquantes par NaN
+#         df['Date'] = np.nan
+
+#     df[['Country', 'Championship']] = df['Championship'].str.split(n=1, expand=True)
+    
+#     df['Match'] = df['Match'].str.replace('\n—\n', ' - ', regex=False)
+    
+#     return df
+
 def clean_data(match_data):
     df = pd.DataFrame(match_data)
 
-    # Vérification si la colonne 'Date' existe
+    # Formatage de la date
     if 'Date' in df.columns:
         df['Date'] = df['Date'].apply(format_date)
     else:
         print("La colonne 'Date' est absente des données, remplacement par NaN.")
-        # Remplacer les valeurs manquantes par NaN
         df['Date'] = np.nan
 
-    df[['Country', 'Championship']] = df['Championship'].str.split(n=1, expand=True)
-    
-    df['Match'] = df['Match'].str.replace('\n—\n', ' - ', regex=False)
-    
+    # Séparation Country / Championship si la colonne existe
+    if 'Championship' in df.columns:
+        split_cols = df['Championship'].str.split(n=1, expand=True)
+        df['Country'] = split_cols[0]
+        df['Championship'] = split_cols[1]
+    else:
+        print("La colonne 'Championship' est absente des données, remplacement par NaN pour 'Country' et 'Championship'.")
+        df['Country'] = np.nan
+        df['Championship'] = np.nan
+
+    # Nettoyage du champ Match
+    if 'Match' in df.columns:
+        df['Match'] = df['Match'].str.replace('\n—\n', ' - ', regex=False)
+    else:
+        print("La colonne 'Match' est absente des données, création avec NaN.")
+        df['Match'] = np.nan
+
     return df
 
 
