@@ -74,12 +74,24 @@ def format_date(date_str):
     return dt_paris.strftime('%d-%m-%Y %H:%M')
 
 
+# def process_data(df):
+#     columns_to_convert = ['Home Win (%)', 'Home Odds', 'Away Win (%)', 'Away Odds',
+#                           'Over 2.5 (%)', 'Odds 2.5', 'Over 3.5 (%)', 'Odds 3.5', 'Btts (%)', 'Odds btts']
+#     for column in columns_to_convert:
+#         df[column] = df[column].str.replace('%', '').str.strip()
+#         df[column] = pd.to_numeric(df[column], errors='coerce')
+    
+#     return df
+
+
 def process_data(df):
     columns_to_convert = ['Home Win (%)', 'Home Odds', 'Away Win (%)', 'Away Odds',
                           'Over 2.5 (%)', 'Odds 2.5', 'Over 3.5 (%)', 'Odds 3.5', 'Btts (%)', 'Odds btts']
+    
     for column in columns_to_convert:
-        df[column] = df[column].str.replace('%', '').str.strip()
-        df[column] = pd.to_numeric(df[column], errors='coerce')
+        if column in df.columns:
+            df[column] = df[column].astype(str).str.replace('%', '').str.strip()
+            df[column] = pd.to_numeric(df[column], errors='coerce')
     
     return df
 
