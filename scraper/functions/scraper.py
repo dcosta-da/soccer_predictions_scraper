@@ -11,7 +11,7 @@ def scrape_data(driver):
     try:
         driver.get("https://www.betclever.com")
 
-        wait = WebDriverWait(driver, 10)
+        wait = WebDriverWait(driver, 5)
         view_more_button = wait.until(
             EC.element_to_be_clickable((By.XPATH, '//*[@id="showmore"]/b'))
         )
@@ -19,7 +19,7 @@ def scrape_data(driver):
         view_more_button.click()
         print("Bouton 'View More Games' cliqué avec succès.")
 
-        time.sleep(10)
+        time.sleep(5)
 
         match_tips_elements = driver.find_elements(By.XPATH, '//a[contains(text(), "Match Tips")]')
         links = [element.get_attribute('href') for element in match_tips_elements]
@@ -27,7 +27,7 @@ def scrape_data(driver):
 
         for link in links:
             driver.get(link)
-            time.sleep(10) 
+            time.sleep(5) 
 
             try:
                 date = driver.find_element(By.XPATH, '/html/body/div[1]/main/section[1]/div/div[1]/div[3]/p[1]').text
