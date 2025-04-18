@@ -19,7 +19,7 @@ def scrape_data(driver):
         view_more_button.click()
         print("Bouton 'View More Games' cliqué avec succès.")
 
-        time.sleep(5)
+        time.sleep(10)
 
         match_tips_elements = driver.find_elements(By.XPATH, '//a[contains(text(), "Match Tips")]')
         links = [element.get_attribute('href') for element in match_tips_elements]
@@ -27,7 +27,7 @@ def scrape_data(driver):
 
         for link in links:
             driver.get(link)
-            time.sleep(3) 
+            time.sleep(10) 
 
             try:
                 date = driver.find_element(By.XPATH, '/html/body/div[1]/main/section[1]/div/div[1]/div[3]/p[1]').text
